@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -60,6 +61,18 @@ class MenuController extends Controller
         $menu->jenis_menu = "Minuman";
         $menu->image_name = $imageEditName;
         $menu->save();
+
+        return redirect()->route('menu.index');
+    }
+
+    public function destroy($id){
+        $menu = menu::find($id);
+
+        if($menu->image && Storage::exists($menu->image)) {
+            Storage::delete($menu->image);
+        }
+
+        $menu->delete();
 
         return redirect()->route('menu.index');
     }
