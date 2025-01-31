@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,3 +39,6 @@ Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 Route::post('/add-menu', [MenuController::class, 'store'])->name('menu.add');
 route::put('/menu/update/{id}', [MenuController::class, 'update'])->name('menu.update');
 route::delete('/menu/delete/{id}', [MenuController::class, 'destroy'])->name('menu.delete');
+
+// route order 
+Route::get('/order', [OrderController::class, 'index'])->name('order.index');
