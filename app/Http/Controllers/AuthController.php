@@ -31,8 +31,10 @@ class AuthController extends Controller
 
                 session([ 'user' => 
                     [
+                        'user_id' => $dataPegawai->id_pegawai,
                         'name' => $dataPegawai->nama_pegawai,
-                        'level' => $dataPegawai->level->level
+                        'level' => $dataPegawai->level->level,
+                        'username' => $dataPegawai->username
                     ]
                 ]);
                 
@@ -42,7 +44,7 @@ class AuthController extends Controller
                 } else if ($level && $level->id_level == 2) {
                     return redirect()->route('menu.index');
                 } else if ($level && $level->id_level == 3) {
-                    return redirect()->route('pemesanan.index');
+                    return redirect()->route('order.index');
                 } else {
                     return redirect()->route('login')->with('error', 'akses tidak ditemukan');
                 }

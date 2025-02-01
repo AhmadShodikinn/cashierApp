@@ -42,3 +42,4 @@ route::delete('/menu/delete/{id}', [MenuController::class, 'destroy'])->name('me
 
 // route order 
 Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+Route::post('/add-order', [OrderController::class, 'store'])->name('order.add');
