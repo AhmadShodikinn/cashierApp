@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,3 +44,6 @@ route::delete('/menu/delete/{id}', [MenuController::class, 'destroy'])->name('me
 // route order 
 Route::get('/order', [OrderController::class, 'index'])->name('order.index');
 Route::post('/add-order', [OrderController::class, 'store'])->name('order.add');
+
+// route laporan
+Route::get('/laporan', [ReportController::class, 'report'])->name('report.report');
