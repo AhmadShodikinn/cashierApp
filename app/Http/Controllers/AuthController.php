@@ -24,7 +24,6 @@ class AuthController extends Controller
             ->where('username', $request->username)
             ->first();
 
-            // dd($dataPegawai->level->level);
 
         if($dataPegawai){
             if (Hash::check($request->password, $dataPegawai->password)) {
@@ -37,22 +36,23 @@ class AuthController extends Controller
                         'username' => $dataPegawai->username
                     ]
                 ]);
+
                 
                 $level = $dataPegawai->level; 
                 if ($level && $level->id_level == 1) {
-                    return redirect()->route('pegawai.index');
+                    return redirect()->route('pegawai.index')->with('success', 'Selamat datang!');
                 } else if ($level && $level->id_level == 2) {
-                    return redirect()->route('menu.index');
+                    return redirect()->route('menu.index')->with('success', 'Selamat datang!');
                 } else if ($level && $level->id_level == 3) {
-                    return redirect()->route('order.index');
+                    return redirect()->route('order.index')->with('success', 'Selamat datang!');
                 } else {
-                    return redirect()->route('login')->with('error', 'akses tidak ditemukan');
+                    return redirect()->route('login')->with('error', 'akses tidak ditemukan!');
                 }
             } else {
-                return redirect()->route('login')->with('error', 'Username atau password salah');
+                return redirect()->route('login')->with('error', 'Username atau password salah!');
             }
         } else {
-            return redirect()->route('login')->with('error', 'Username atau password salah');
+            return redirect()->route('login')->with('error', 'Pengguna tidak ditemukan!');
         }
     }
 

@@ -36,7 +36,7 @@ class MenuController extends Controller
             'image_name' => $imageAddName,
         ]);
 
-        return redirect()->route('menu.index');
+        return redirect()->route('menu.index')->with('success', 'Menu berhasil ditambahkan!');
     }
 
     public function update(Request $request, $id){
@@ -62,7 +62,7 @@ class MenuController extends Controller
         $menu->image_name = $imageEditName;
         $menu->save();
 
-        return redirect()->route('menu.index');
+        return redirect()->route('menu.index')->with('success', 'Menu berhasil diubah!');
     }
 
     public function destroy($id){
@@ -74,6 +74,6 @@ class MenuController extends Controller
 
         $menu->delete();
 
-        return redirect()->route('menu.index');
+        return redirect()->route('menu.index')->with('success', 'Menu berhasil dihapus!');
     }
 }

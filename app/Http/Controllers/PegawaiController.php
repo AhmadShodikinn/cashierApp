@@ -28,7 +28,7 @@ class PegawaiController extends Controller
             'id_level' => 3
         ]);
 
-        return redirect()->route('pegawai.index');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan!');
     }
 
     // public function find($id){
@@ -49,7 +49,7 @@ class PegawaiController extends Controller
         $pegawai->password = Hash::make($request->password);
         $pegawai->save();
 
-        return redirect()->route('pegawai.index');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diubah!');
     }
 
     public function destroy($id){

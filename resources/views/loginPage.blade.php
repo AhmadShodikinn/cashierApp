@@ -7,6 +7,24 @@
 </head>
 <body>
   <div class="bg-[#F0FEDF] w-screen h-screen flex-col flex justify-center items-center">
+
+  @if(session('error'))
+  <div id="toast-simple" class="fixed flex items-center max-w-xs p-4 space-x-4 bg-[#ffdddd] border border-[#d02222] rounded-lg shadow-sm top-5 right-5" role="alert">
+        <svg class="w-5 h-5 text-[#d02222] " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+        </svg>
+      <div class="text-[#d02222] text-xs font-semibold">{{ session('error') }}</div>
+  </div>
+  @endif
+
+  @if(session('success'))
+  <div id="toast-simple" class="fixed flex items-center max-w-xs p-4 space-x-4 bg-[#ddffdd] border border-[#22d022] rounded-lg shadow-sm top-5 right-5" role="alert">
+        <svg class="w-5 h-5 text-[#22d022] " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+        </svg>
+      <div class="text-[#22d022] text-xs font-semibold">{{ session('success') }}</div>
+  </div>
+  @endif
     
   <!-- Logos -->
     <div class="w-52 h-[109px] relative mb-10">
@@ -74,6 +92,15 @@
     <!-- END FORM -->
   </div>
 
+  
+
+  
+
+
+
+
+
+
   <script>
         const togglePasswordButton = document.getElementById('togglePassword');
         const passwordField = document.getElementById('password');
@@ -92,7 +119,45 @@
                 iconOpen.classList.remove('hidden');
             }
         });
-        
+    </script>
+
+<script>
+        // Function to show toast with animation
+        function showToast(type) {
+            const $targetEl = document.getElementById('toast-simple');
+            
+            if ($targetEl) {
+                $targetEl.classList.remove('hidden'); // Show the toast
+                
+                const options = {
+                    transition: 'transition-opacity',
+                    duration: 1000,  // Durasi animasi dalam milidetik
+                    timing: 'ease-out',  // Timing function
+
+                    // Callback function
+                    onHide: (context, targetEl) => {
+                        console.log(`${type} toast has been dismissed`);
+                        console.log(targetEl);
+                    }
+                };
+
+                // Apply the fade out effect after 3 seconds
+                setTimeout(function () {
+                    $targetEl.classList.add('opacity-0'); // Add fade out class
+                    $targetEl.classList.add(options.transition); // Add transition class
+
+                    // After the transition duration, hide the element
+                    setTimeout(function () {
+                        $targetEl.classList.add('hidden'); // Hide the toast
+                        options.onHide(null, $targetEl); // Run the callback
+                    }, options.duration);
+                }, 3000); // Delay 3 seconds before dismissing the toast
+            }
+        }
+
+        // Example usage
+        setTimeout(() => showToast('error'), 1000); // Show error toast after 1 second
+        setTimeout(() => showToast('success'), 5000); // Show success toast after 5 seconds
     </script>
 </body>
 </html>

@@ -55,6 +55,6 @@ class OrderController extends Controller
             'status' => "Sudah Dibayar",
         ]);
 
-        return redirect()->route('order.index');
+        return redirect()->route('order.index')->with('success', 'Pesanan berhasil dibuat!');
     }
 }
