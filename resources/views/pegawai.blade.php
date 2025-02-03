@@ -72,6 +72,7 @@
                                     <div class="flex gap-2">
                                         <div class="flex-1">
                                             <input type="password" id="password" name="password" class="self-stretch h-[38px] w-[670px] p-2.5 rounded-[10px] border border-[#389012] text-[#389012] text-xs font-semibold font-['Poppins']" required>
+                                            <small id="passwordHelp" class="text-xs text-red-500 mt-1 hidden">Password harus memiliki minimal 8 karakter.</small>
                                         </div>
                                         <div class="flex-none">
                                         <button type="button" id="togglePassword" class="self-stretch h-[38px] w-[38px] p-0 rounded-[10px] border border-[#389012] text-[#389012] flex justify-center items-center">
@@ -162,6 +163,7 @@
                     <div class="flex gap-2">
                         <div class="flex-1">
                             <input type="password" id="passwordAdd" name="passwordAdd" class="self-stretch h-[38px] w-[670px] p-2.5 rounded-[10px] border border-[#389012] text-[#389012] text-xs font-semibold font-['Poppins']" required>
+                            <small id="passwordHelpAdd" class="text-xs text-red-500 mt-1 hidden">Password harus memiliki minimal 8 karakter.</small>
                         </div>
                         <div class="flex-none">
                         <button type="button" id="togglePasswordAdd" class="self-stretch h-[38px] w-[38px] p-0 rounded-[10px] border border-[#389012] text-[#389012] flex justify-center items-center">
@@ -200,6 +202,25 @@
         const iconAddClosed = document.getElementById('iconAddClosed');
         const iconOpen = document.getElementById('iconOpen');
         const iconAddOpen = document.getElementById('iconAddOpen');
+        
+        const passwordAddInput = document.getElementById('passwordHelpAdd');
+        const passwordInput = document.getElementById('passwordHelp');
+
+        passwordField.addEventListener('input', function() {
+            if (passwordField.value.length < 8) {
+                passwordInput.classList.remove('hidden');
+            } else {
+                passwordInput.classList.add('hidden');
+            }
+        });
+
+        passwordAddField.addEventListener('input', function() {
+            if (passwordAddField.value.length < 8) {
+                passwordAddInput.classList.remove('hidden');
+            } else {
+                passwordAddInput.classList.add('hidden');
+            }
+        });
 
         togglePasswordButton.addEventListener('click', function() {
             const type = passwordField.type === 'password' ? 'text' : 'password';
@@ -227,7 +248,6 @@
                 iconAddOpen.classList.remove('hidden');
             }
         });
-        
     </script>
 @endsection
 
