@@ -22,12 +22,12 @@ class LevelSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'level' => 'kasir',
+                'level' => 'manajer',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'level' => 'manajer',
+                'level' => 'kasir',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

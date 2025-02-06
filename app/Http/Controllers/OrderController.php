@@ -17,17 +17,23 @@ class OrderController extends Controller
     public function store(request $request){
         
         $validate = $request->validate([
+            'name' => 'required|string',
             'menu' => 'required|array',
             'menu.*.id_menu' => 'required|exists:menu,id_menu',
             'menu.*.quantity' => 'required|integer|min:1',
+            'paymentMethod' => 'required|string|in:Cash,Cashless',
         ]);
 
+        $name = $validate['name'];
         $menuItems = array_values($validate['menu']);
+        $statusPembayaran = $validate['paymentMethod'];
 
         $totalHarga = 0;
             foreach ($menuItems as $item) {
             $menu = menu::find($item['id_menu']);
-            $totalHarga += $menu->harga * $item['quantity'];
+            $hargaItem = $menu->harga * $item['quantity'];
+            $pajakItem = $hargaItem * 0.12;
+            $totalHarga += $hargaItem + $pajakItem;
         }
  
         $pesanan = pemesanan::create([
@@ -55,6 +61,27 @@ class OrderController extends Controller
             'status' => "Sudah Dibayar",
         ]);
 
-        return redirect()->route('order.index')->with('success', 'Pesanan berhasil dibuat!');
+        // return redirect()->route('order.index')->with('success', 'Pesanan berhasil dibuat!');
+        return $this->showOrder($name, $pesanan->id_pemesanan, $statusPembayaran, $menuItems, $totalHarga);
     }
+
+    public function showOrder($name, $id_pemesanan, $statusPembayaran, $menuItems, $totalHarga){
+        $pesanan = pemesanan::find($id_pemesanan);
+
+        foreach ($menuItems as &$item) { 
+            $menu = menu::find($item['id_menu']);
+            $item['nama_menu'] = $menu->nama_menu; 
+            $item['harga'] = $menu->harga; 
+            $item['subtotal'] = $item['quantity'] * $item['harga'];
+        }
+
+        return view('struk', [
+            'name' => $name,
+            'statusPembayaran' => $statusPembayaran,
+            'menuItems' => $menuItems,
+            'totalHarga' => $totalHarga,
+            'pesanan' => $pesanan,
+        ]);
+    }
+
 }

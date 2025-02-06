@@ -77,56 +77,59 @@
                 <div class="w-full flex flex-col justify-center items-center">
                     <div class="text-black text-xl font-semibold font-['Poppins'] leading-normal mb-4">Pesanan</div>
                     <div class="w-full max-w-md px-5">
+                    <form action="{{ route('order.add') }}" method="post" id="orderForm">
                         <div class="text-black text-sm font-semibold font-['Poppins'] leading-[14px] mb-2">Nama pelanggan</div>
                         <div class="self-stretch h-11 px-5 py-[15px] bg-white rounded-[50px] border-2 mb-4 border-black flex items-center gap-8">
-                            <input type="text" placeholder="Aldy Rehat" class="w-full text-[#040404] text-sm font-semibold font-['Poppins'] leading-[14px] bg-transparent outline-none" />
+                            <input type="text" name="name" placeholder="Aldy Rehat" class="w-full text-[#040404] text-sm font-semibold font-['Poppins'] leading-[14px] bg-transparent outline-none" />
                         </div>
                         <div class="text-black text-sm font-semibold font-['Poppins'] leading-[14px] mb-2">Daftar Pesanan</div>
-                            <form action="{{ route('order.add') }}" method="post" id="orderForm">
-                                @csrf
-                                <div class="flex flex-col pb-4 h-[125px] gap-2 overflow-y-auto no-scrollbar" id="selectedMenuContainer">
-   
+                        @csrf
+                        <div class="flex flex-col pb-4 h-[125px] gap-2 overflow-y-auto no-scrollbar" id="selectedMenuContainer">
+
+                        </div>
+
+                        <div class="h-11 relative bg-white rounded-[50px] border-2 border-black overflow-hidden">
+                            <label for="payment" class="inline-flex items-center p-0 w-full rounded-md cursor-pointer dark:text-gray-100">
+                                <input id="payment" name="payment" type="checkbox" class="hidden peer">
+                                <span class="w-1/2 px-4 py-2 rounded-[50px] dark:bg-[#389012] peer-checked:dark:bg-white peer-checked:text-[#389012] text-center font-['poppins'] font-semibold">Cash</span>
+                                <span class="w-1/2 px-4 py-2 rounded-[50px] dark:bg-white text-[#389012] peer-checked:dark:bg-[#389012] peer-checked:text-white text-center font-['poppins'] font-semibold">Cashless</span>
+                            </label>
+                        </div>
+
+                        <input type="text" name="paymentMethod" id="paymentMethod" value="Cash" readonly hidden />
+
+                        <div class="h-[137px] pt-4 flex-col justify-start items-start gap-2.5 flex">
+                            <div class="text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Detail pembayaran</div>
+                            <div class="h-[113px] py-5 rounded-[20px] flex-col justify-start items-start gap-2.5 flex">
+                                <div class="self-stretch justify-between items-center inline-flex">
+                                    <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Subtotal</div>
+                                    <div class="rincian-subtotal text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Rp 0</div>
                                 </div>
-
-                                <div class="h-11 relative bg-white rounded-[50px] border-2 border-black overflow-hidden">
-                                    <label for="Toggle3" class="inline-flex items-center p-0 w-full rounded-md cursor-pointer dark:text-gray-100">
-                                        <input id="Toggle3" type="checkbox" class="hidden peer">
-                                        <span class="w-1/2 px-4 py-2 rounded-[50px] dark:bg-[#389012] peer-checked:dark:bg-white peer-checked:text-[#389012] text-center font-['poppins'] font-semibold">Cash</span>
-                                        <span class="w-1/2 px-4 py-2 rounded-[50px] dark:bg-white text-[#389012] peer-checked:dark:bg-[#389012] peer-checked:text-white text-center font-['poppins'] font-semibold">Cashless</span>
-                                    </label>
+                                <div class="self-stretch justify-between items-center inline-flex">
+                                    <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Pajak</div>
+                                    <div class="rincian-pajak text-black text-sm font-semibold font-['Poppins'] leading-[14px]">12%</div>
                                 </div>
-
-                                <div class="h-[137px] pt-4 flex-col justify-start items-start gap-2.5 flex">
-                                    <div class="text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Detail pembayaran</div>
-                                    <div class="h-[113px] py-5 rounded-[20px] flex-col justify-start items-start gap-2.5 flex">
-                                        <div class="self-stretch justify-between items-center inline-flex">
-                                            <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Subtotal</div>
-                                            <div class="rincian-subtotal text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Rp 0</div>
-                                        </div>
-                                        <div class="self-stretch justify-between items-center inline-flex">
-                                            <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Pajak</div>
-                                            <div class="rincian-pajak text-black text-sm font-semibold font-['Poppins'] leading-[14px]">12%</div>
-                                        </div>
-                                        <div class="w-[299px] h-px bg-[#000000]"></div>
-                                        <div class="self-stretch justify-between items-center inline-flex">
-                                            <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Total</div>
-                                            <div class="rincian-total text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Rp 0</div>
-                                        </div>
-                                    </div>
+                                <div class="w-[299px] h-px bg-[#000000]"></div>
+                                <div class="self-stretch justify-between items-center inline-flex">
+                                    <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Total</div>
+                                    <!-- <div class="rincian-total text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Rp 0</div> -->    
+                                    <input type="text" name="" disabled id="rincian-total" class="text-right text-black text-sm font-semibold font-['Poppins'] leading-[14px]" value="Rp 0"/>
                                 </div>
-
-
-
-                                <div class="pt-4">
-                                    <button type="submit" class="w-full px-4 py-2.5 bg-[#389012] rounded-[10px] border border-[#389012] text-white font-semibold text-sm flex items-center justify-between">
-                                        BAYAR
-                                        <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </form>
                             </div>
+                        </div>
+
+
+
+                        <div class="pt-4">
+                            <button type="submit" class="w-full px-4 py-2.5 bg-[#389012] rounded-[10px] border border-[#389012] text-white font-semibold text-sm flex items-center justify-between">
+                                BAYAR
+                                <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                    </div>
                 </div>
             </div>
 
@@ -154,39 +157,47 @@
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
-    const menuButtons = document.querySelectorAll('.menu-select-btn');
-    const selectedMenuContainer = document.getElementById('selectedMenuContainer');
-    
-    menuButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const menuId = this.getAttribute('data-menu-id');
-            const menuName = this.closest('.menu-item').querySelector('p').innerText;
-            const menuPriceText = this.closest('.menu-item').querySelector('p + p').innerText;
-            const menuImage = this.closest('.menu-item').querySelector('img').src;
-
-            // Mengambil harga dalam format angka
-            const menuPrice = parseInt(menuPriceText.replace(/[^\d]/g, ''), 10);
-
-            let quantity = 1;
-
-            // Cek jika menu dengan ID yang sama sudah ada
-            const existingOrderItem = selectedMenuContainer.querySelector(`#order-item-${menuId}`);
-            if (existingOrderItem) {
-                // Jika sudah ada, hanya update quantity-nya saja
-                const quantityDisplay = existingOrderItem.querySelector('.quantity-display');
-                const inputQuantity = existingOrderItem.querySelector(`#input-quantity-${menuId}`);
-                quantity++;
-                quantityDisplay.textContent = quantity;
-                inputQuantity.value = quantity;
-
-                // Update rincian pembayaran
-                updateOrderDetails(menuPrice, quantity);
-                return; // Keluar agar tidak menambah menu yang sama lagi
+        const paymentToggle = document.getElementById('payment');
+        const paymentMethod = document.getElementById('paymentMethod');
+        
+        paymentToggle.addEventListener('change', function() {
+            if (paymentToggle.checked) {
+                paymentMethod.value = 'Cashless';
+            } else {
+                paymentMethod.value = 'Cash';
             }
+        });
 
-            // Buat elemen baru untuk item yang dipilih
-            // Menambahkan input hidden untuk menu yang dipilih
+        document.addEventListener('DOMContentLoaded', function () {
+        const menuButtons = document.querySelectorAll('.menu-select-btn');
+        const selectedMenuContainer = document.getElementById('selectedMenuContainer');
+
+        let totalAmount = 0; 
+        let totalTax = 0; 
+
+        menuButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const menuId = this.getAttribute('data-menu-id');
+                const menuName = this.closest('.menu-item').querySelector('p').innerText;
+                const menuPriceText = this.closest('.menu-item').querySelector('p + p').innerText;
+                const menuImage = this.closest('.menu-item').querySelector('img').src;
+
+                const menuPrice = parseInt(menuPriceText.replace(/[^\d]/g, ''), 10);
+
+                let quantity = 1;
+
+                const existingOrderItem = selectedMenuContainer.querySelector(`#order-item-${menuId}`);
+                if (existingOrderItem) {
+                    const quantityDisplay = existingOrderItem.querySelector('.quantity-display');
+                    const inputQuantity = existingOrderItem.querySelector(`#input-quantity-${menuId}`);
+                    // quantity++; // increment quantity if item exists
+                    // quantityDisplay.textContent = quantity;
+                    // inputQuantity.value = quantity;
+
+                    // updateOrderDetails(menuPrice, quantity, 'increase');
+                    return;
+                }
+
                 const orderItem = document.createElement('div');
                 orderItem.classList.add('self-stretch', 'p-2', 'bg-white', 'rounded-[20px]', 'border-2', 'border-black', 'justify-start', 'items-start', 'gap-2', 'inline-flex');
                 orderItem.id = `order-item-${menuId}`;
@@ -221,58 +232,59 @@
                     <input type="hidden" name="menu[${menuId}][quantity]" value="${quantity}" id="input-quantity-${menuId}" />
                 `;
 
+                selectedMenuContainer.appendChild(orderItem);
 
-            selectedMenuContainer.appendChild(orderItem);
+                const quantityDisplay = document.getElementById(`quantity-display-${menuId}`);
+                const decreaseButton = orderItem.querySelector('[data-action="decrease"]');
+                const increaseButton = orderItem.querySelector('[data-action="increase"]');
+                const inputQuantity = document.getElementById(`input-quantity-${menuId}`);
 
-            // Menangani pengubahan jumlah
-            const quantityDisplay = document.getElementById(`quantity-display-${menuId}`);
-            const decreaseButton = orderItem.querySelector('[data-action="decrease"]');
-            const increaseButton = orderItem.querySelector('[data-action="increase"]');
-            const inputQuantity = document.getElementById(`input-quantity-${menuId}`);
+                decreaseButton.addEventListener('click', function() {
+                    if (quantity >= 1) {
+                        quantity--;
+                        quantityDisplay.textContent = quantity;
+                        inputQuantity.value = quantity;
+                        document.getElementById(`quantity-${menuId}`).textContent = `${quantity}X`;
 
-            decreaseButton.addEventListener('click', function() {
-                if (quantity > 1) {
-                    quantity--;
+                        updateOrderDetails(menuPrice, quantity, 'decrease');
+
+                        if (quantity == 0) {
+                            orderItem.remove();
+                        }
+                    } 
+                });
+
+                increaseButton.addEventListener('click', function() {
+                    quantity++;
                     quantityDisplay.textContent = quantity;
                     inputQuantity.value = quantity;
                     document.getElementById(`quantity-${menuId}`).textContent = `${quantity}X`;
 
-                    // Update rincian pembayaran
-                    updateOrderDetails(menuPrice, quantity);
-                }
+                    updateOrderDetails(menuPrice, quantity, 'increase');
+                });
+
+                updateOrderDetails(menuPrice, quantity, 'increase');
             });
+        });
 
-            increaseButton.addEventListener('click', function() {
-                quantity++;
-                quantityDisplay.textContent = quantity;
-                inputQuantity.value = quantity;
-                document.getElementById(`quantity-${menuId}`).textContent = `${quantity}X`;
+        function updateOrderDetails(menuPrice, quantity, action) {
+            const priceChange = menuPrice * quantity;
 
-                // Update rincian pembayaran
-                updateOrderDetails(menuPrice, quantity);
-            });
-
-            // Fungsi untuk memperbarui rincian pembayaran
-            function updateOrderDetails(menuPrice, quantity) {
-                const subtotal = menuPrice * quantity;
-                const tax = subtotal * 0.12; // Pajak 12%
-                const total = subtotal + tax;
-
-                // Memperbarui rincian pembayaran
-                document.querySelector('.rincian-subtotal').textContent = `Rp ${subtotal.toLocaleString()}`;
-                document.querySelector('.rincian-pajak').textContent = `12%`;
-                document.querySelector('.rincian-total').textContent = `Rp ${total.toLocaleString()}`;
+            if (action === 'increase') {
+                totalAmount += menuPrice; 
+            } else if (action === 'decrease') {
+                totalAmount -= menuPrice; 
             }
 
-            // Panggil untuk pertama kali untuk menampilkan nilai awal
-            updateOrderDetails(menuPrice, quantity);
-        });
+            const tax = totalAmount * 0.12; 
+            const total = totalAmount + tax; 
+
+            // Update the displayed values
+            document.querySelector('.rincian-subtotal').textContent = `Rp ${totalAmount.toLocaleString()}`;
+            document.querySelector('.rincian-pajak').textContent = `12%`;
+            document.getElementById('rincian-total').value = `Rp ${total.toLocaleString()}`;
+        }
     });
-});
-
-
-
-
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>

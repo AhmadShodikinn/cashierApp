@@ -44,11 +44,11 @@
                                         </div>
                                         <div class="flex justify-between w-full">
                                             <div class="text-[#389012] text-xl font-semibold font-['Poppins'] leading-normal">Edit menu</div>
-                                            <!-- <button data-modal-target="delete-modal-{{ $menu->id_menu }}" data-modal-toggle="delete-modal-{{ $menu->id_menu }}" class="" type="button">
+                                            <button data-modal-target="delete-modal-{{ $menu->id_menu }}" data-modal-toggle="delete-modal-{{ $menu->id_menu }}" class="" type="button">
                                                 <svg class="w-6 h-6 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
                                                 </svg>
-                                            </button> -->
+                                            </button>
                                         </div>
                                     </div>
 
@@ -182,26 +182,6 @@
     </div>
 
     <script>
-        // function updateFileName(index) {
-        //     console.log(index);
-
-        //     const fileEditInput = document.getElementById('imageEdit_name');
-        //     console.log(fileEditInput.value);
-        //     const fileNameEditDisplay = document.getElementById('fileNameEditDisplay');
-            
-        //     for (let i = 0; i < 5; i++) {
-        //     const test = document.getElementById('test-' + i);
-            
-        //     // Mengecek apakah iterasi ke-3 (indeks 3)
-        //     if (i === 3) {
-        //         test.value = fileEditInput.files[0].name; // Mengubah nilai input ke file yang dipilih
-        //     }
-        // }
-
-        //     fileNameEditDisplay.value = fileEditInput.files[0].name;
-        //     console.log(fileNameEditDisplay.value);
-        // }
-        
         function AddFileName(){
             const fileAddInput = document.getElementById('imageAdd_name');
             const fileAddNameDisplay = document.getElementById('fileAddNameDisplay');
