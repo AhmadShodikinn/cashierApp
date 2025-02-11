@@ -20,7 +20,7 @@ class PemesananSeeder extends Seeder
                 'total_harga' => 15000 * 2,  
                 'tanggal_pemesanan' => Carbon::today()->toDateString(),
                 'nomor_meja' => 1,
-                'id_member' => 1,  // id_member yang sesuai
+                'id_member' => 1, 
                 'diskon' => 'false',
                 'created_at' => now(),
                 'updated_at' => now(),

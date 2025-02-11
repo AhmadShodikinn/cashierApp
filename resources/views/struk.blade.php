@@ -45,9 +45,19 @@
             </ul>
         </div>
 
-        <div class="flex justify-between py-2 border-t-2 mt-4">
-            <span class="font-semibold text-gray-800">Total</span>
-            <span class="font-semibold text-gray-800">Rp {{ number_format($totalHarga, 0, ',', '.') }}</span>
+        <div class="flex flex-col py-2 border-t-2 mt-4">
+            <div class="flex justify-between">
+                <span class="font-semibold text-gray-800">Total</span>
+                <span class="font-semibold text-gray-800">Rp {{ number_format($totalHarga, 0, ',', '.') }}</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="font-regular text-sm text-gray-800">Bayar</span>
+                <span class="font-regular text-sm text-gray-800">Rp {{ number_format($totalPembayaran, 0, ',', '.') }}</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="font-regular text-sm text-gray-800">Kembali</span>
+                <span class="font-regular text-sm text-gray-800">Rp {{ number_format($totalKembalian, 0, ',', '.') }}</span>
+            </div>
         </div>
 
         <div class="mt-6 text-center">

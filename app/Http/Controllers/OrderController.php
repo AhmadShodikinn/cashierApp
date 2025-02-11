@@ -22,20 +22,24 @@ class OrderController extends Controller
             'menu.*.id_menu' => 'required|exists:menu,id_menu',
             'menu.*.quantity' => 'required|integer|min:1',
             'paymentMethod' => 'required|string|in:Cash,Cashless',
+            'paymentAmount' => 'required|integer|min:1',
         ]);
 
         $name = $validate['name'];
         $menuItems = array_values($validate['menu']);
         $statusPembayaran = $validate['paymentMethod'];
+        $paymentAmount = $validate['paymentAmount'];
 
         $totalHarga = 0;
-            foreach ($menuItems as $item) {
+        foreach ($menuItems as $item) {
             $menu = menu::find($item['id_menu']);
             $hargaItem = $menu->harga * $item['quantity'];
             $pajakItem = $hargaItem * 0.12;
             $totalHarga += $hargaItem + $pajakItem;
         }
- 
+        
+        $paymentChange = $paymentAmount - $totalHarga;
+
         $pesanan = pemesanan::create([
             'jumlah' => count($menuItems),
             'total_harga' => $totalHarga,
@@ -57,15 +61,15 @@ class OrderController extends Controller
             'id_pemesanan' => $pesanan->id_pemesanan,
             'id_pegawai' => session('user')['user_id'],
             'tanggal_pembayaran' => now(),
+            'metode_pembayaran' => $statusPembayaran,
             'total_pembayaran' => $totalHarga,
             'status' => "Sudah Dibayar",
         ]);
 
-        // return redirect()->route('order.index')->with('success', 'Pesanan berhasil dibuat!');
-        return $this->showOrder($name, $pesanan->id_pemesanan, $statusPembayaran, $menuItems, $totalHarga);
+        return $this->showOrder($name, $pesanan->id_pemesanan, $statusPembayaran, $menuItems, $totalHarga, $paymentAmount, $paymentChange);
     }
 
-    public function showOrder($name, $id_pemesanan, $statusPembayaran, $menuItems, $totalHarga){
+    public function showOrder($name, $id_pemesanan, $statusPembayaran, $menuItems, $totalHarga, $paymentAmount, $paymentChange){
         $pesanan = pemesanan::find($id_pemesanan);
 
         foreach ($menuItems as &$item) { 
@@ -81,6 +85,8 @@ class OrderController extends Controller
             'menuItems' => $menuItems,
             'totalHarga' => $totalHarga,
             'pesanan' => $pesanan,
+            'totalPembayaran' => $paymentAmount,
+            'totalKembalian' => $paymentChange,
         ]);
     }
 

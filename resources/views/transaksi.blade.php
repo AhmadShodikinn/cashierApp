@@ -47,7 +47,7 @@
 
             <div class="content flex h-full gap-6 px-4 flex-grow py-4">
             <!-- Menu -->
-            <div class="menu flex flex-col h-full">
+            <div class="menu flex flex-col">
                 <div class="flex-1 bg-[#F0FEDF]">
                     <div class="flex flex-col justify-between">
                         <div class="pl-8 mb-3 h-12 w-full bg-white rounded-[50px] border-2 border-[#389012] inline-flex">
@@ -73,65 +73,67 @@
                 </div>
             </div>
 
-            <div class="cashier flex flex-col flex-grow px-5 py-[30px] bg-white rounded-[15px] border-2 border-[#389012] gap-5">
-                <div class="w-full flex flex-col justify-center items-center">
-                    <div class="text-black text-xl font-semibold font-['Poppins'] leading-normal mb-4">Pesanan</div>
-                    <div class="w-full max-w-md px-5">
-                    <form action="{{ route('order.add') }}" method="post" id="orderForm">
-                        <div class="text-black text-sm font-semibold font-['Poppins'] leading-[14px] mb-2">Nama pelanggan</div>
-                        <div class="self-stretch h-11 px-5 py-[15px] bg-white rounded-[50px] border-2 mb-4 border-black flex items-center gap-8">
-                            <input type="text" name="name" placeholder="Aldy Rehat" class="w-full text-[#040404] text-sm font-semibold font-['Poppins'] leading-[14px] bg-transparent outline-none" />
-                        </div>
-                        <div class="text-black text-sm font-semibold font-['Poppins'] leading-[14px] mb-2">Daftar Pesanan</div>
-                        @csrf
-                        <div class="flex flex-col pb-4 h-[125px] gap-2 overflow-y-auto no-scrollbar" id="selectedMenuContainer">
+                <div class="cashier flex flex-col px-4 py-4 bg-white rounded-[15px] border-2 border-[#389012]">
+                    <div class="w-full flex flex-col justify-center items-center">
+                        <div class="text-black text-xl font-semibold font-['Poppins'] leading-normal">Pesanan</div>
+                        <div class="w-full max-w-md px-5 gap-1">
+                        <form action="{{ route('order.add') }}" method="post" id="orderForm">
+                            <div class="text-black text-sm font-semibold font-['Poppins'] leading-[14px] mb-2">Nama pelanggan</div>
+                            <div class="self-stretch h-11 px-5 py-[15px] bg-white rounded-[50px] border-2 mb-2 border-black flex items-center gap-8">
+                                <input type="text" name="name" placeholder="Aldy Rehat" class="w-full text-[#040404] text-sm font-semibold font-['Poppins'] leading-[14px] bg-transparent outline-none" />
+                            </div>
+                            <div class="text-black text-sm font-semibold font-['Poppins'] leading-[14px] mb-2">Daftar Pesanan</div>
+                            @csrf
+                            <div class="flex flex-col pb-4 h-[125px] gap-2 overflow-y-auto no-scrollbar" id="selectedMenuContainer">
 
-                        </div>
+                            </div>
 
-                        <div class="h-11 relative bg-white rounded-[50px] border-2 border-black overflow-hidden">
-                            <label for="payment" class="inline-flex items-center p-0 w-full rounded-md cursor-pointer dark:text-gray-100">
-                                <input id="payment" name="payment" type="checkbox" class="hidden peer">
-                                <span class="w-1/2 px-4 py-2 rounded-[50px] dark:bg-[#389012] peer-checked:dark:bg-white peer-checked:text-[#389012] text-center font-['poppins'] font-semibold">Cash</span>
-                                <span class="w-1/2 px-4 py-2 rounded-[50px] dark:bg-white text-[#389012] peer-checked:dark:bg-[#389012] peer-checked:text-white text-center font-['poppins'] font-semibold">Cashless</span>
-                            </label>
-                        </div>
-
-                        <input type="text" name="paymentMethod" id="paymentMethod" value="Cash" readonly hidden />
-
-                        <div class="h-[137px] pt-4 flex-col justify-start items-start gap-2.5 flex">
-                            <div class="text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Detail pembayaran</div>
-                            <div class="h-[113px] py-5 rounded-[20px] flex-col justify-start items-start gap-2.5 flex">
-                                <div class="self-stretch justify-between items-center inline-flex">
-                                    <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Subtotal</div>
-                                    <div class="rincian-subtotal text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Rp 0</div>
+                            <div class="flex flex-col gap-1">
+                                <div class="h-11 relative bg-white rounded-[50px] border-2 border-black overflow-hidden">
+                                    <label for="payment" class="inline-flex items-center p-0 w-full rounded-md cursor-pointer dark:text-gray-100">
+                                        <input id="payment" name="payment" type="checkbox" class="hidden peer">
+                                        <span class="w-1/2 px-4 py-2 rounded-[50px] dark:bg-[#389012] peer-checked:dark:bg-white peer-checked:text-[#389012] text-center font-['poppins'] font-semibold">Cash</span>
+                                        <span class="w-1/2 px-4 py-2 rounded-[50px] dark:bg-white text-[#389012] peer-checked:dark:bg-[#389012] peer-checked:text-white text-center font-['poppins'] font-semibold">Cashless</span>
+                                    </label>
                                 </div>
-                                <div class="self-stretch justify-between items-center inline-flex">
-                                    <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Pajak</div>
-                                    <div class="rincian-pajak text-black text-sm font-semibold font-['Poppins'] leading-[14px]">12%</div>
-                                </div>
-                                <div class="w-[299px] h-px bg-[#000000]"></div>
-                                <div class="self-stretch justify-between items-center inline-flex">
-                                    <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Total</div>
-                                    <!-- <div class="rincian-total text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Rp 0</div> -->    
-                                    <input type="text" name="" disabled id="rincian-total" class="text-right text-black text-sm font-semibold font-['Poppins'] leading-[14px]" value="Rp 0"/>
+                                <div class="self-stretch h-11 px-5 py-[15px] bg-white rounded-[50px] border-2 mb-4 border-black flex items-center gap-8">
+                                    <input type="number" id="paymentAmount" name="paymentAmount" placeholder="Total bayar" class="w-full text-[#040404] text-sm font-semibold font-['Poppins'] leading-[14px] bg-transparent outline-none" />
                                 </div>
                             </div>
+
+                            <input type="text" name="paymentMethod" id="paymentMethod" value="Cash" readonly hidden />
+                            <!-- <input type="text" name="paymentChange" id="paymentChange" value="Change" readonly hidden /> -->
+
+                            <div class="h-[137px] flex-col justify-start items-start gap-2.5 flex">
+                                <div class="text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Detail pembayaran</div>
+                                <div class=" rounded-[20px] flex-col justify-start items-start gap-2.5 flex">
+                                    <div class="self-stretch justify-between items-center inline-flex">
+                                        <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Subtotal</div>
+                                        <div class="rincian-subtotal text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Rp 0</div>
+                                    </div>
+                                    <div class="self-stretch justify-between items-center inline-flex">
+                                        <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Pajak</div>
+                                        <div class="rincian-pajak text-black text-sm font-semibold font-['Poppins'] leading-[14px]">12%</div>
+                                    </div>
+                                    <div class="w-[299px] h-px bg-[#000000]"></div>
+                                    <div class="self-stretch justify-between items-center inline-flex">
+                                        <div class="grow shrink basis-0 text-black text-sm font-semibold font-['Poppins'] leading-[14px]">Total</div> 
+                                        <input type="text" name="" disabled id="rincian-total" class="text-right text-black text-sm font-semibold font-['Poppins'] leading-[14px]" value="Rp 0"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full px-4 py-2.5 bg-[#389012] rounded-[10px] border border-[#389012] text-white font-semibold text-sm flex items-center justify-between">
+                                    BAYAR
+                                    <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
                         </div>
-
-
-
-                        <div class="pt-4">
-                            <button type="submit" class="w-full px-4 py-2.5 bg-[#389012] rounded-[10px] border border-[#389012] text-white font-semibold text-sm flex items-center justify-between">
-                                BAYAR
-                                <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
                     </div>
                 </div>
-            </div>
 
 
             </div>
@@ -190,11 +192,6 @@
                 if (existingOrderItem) {
                     const quantityDisplay = existingOrderItem.querySelector('.quantity-display');
                     const inputQuantity = existingOrderItem.querySelector(`#input-quantity-${menuId}`);
-                    // quantity++; // increment quantity if item exists
-                    // quantityDisplay.textContent = quantity;
-                    // inputQuantity.value = quantity;
-
-                    // updateOrderDetails(menuPrice, quantity, 'increase');
                     return;
                 }
 
@@ -268,6 +265,8 @@
         });
 
         function updateOrderDetails(menuPrice, quantity, action) {
+            // const paymentAmountInput = document.getElementById('paymentAmount');
+            // const paymentChangeInput = document.getElementById('paymentChange');
             const priceChange = menuPrice * quantity;
 
             if (action === 'increase') {
@@ -283,7 +282,21 @@
             document.querySelector('.rincian-subtotal').textContent = `Rp ${totalAmount.toLocaleString()}`;
             document.querySelector('.rincian-pajak').textContent = `12%`;
             document.getElementById('rincian-total').value = `Rp ${total.toLocaleString()}`;
+
+            //calculate change for payment Method
+            // const paymentAmount = parseInt(paymentAmountInput.value, 10) || 11;
+            // const change = paymentAmount - total;
+            // if (change >= 0) {
+            //     // paymentChangeInput.value = `Rp ${change.toLocaleString()}`;
+            //     paymentChangeInput.value = paymentAmount;
+            // } else {
+            //     paymentChangeInput.value = paymentAmount;
+            // }
         }
+
+        // paymentAmountInput.addEventListener('input', function(){
+        //     updateOrderDetails();
+        // })
     });
 
     </script>

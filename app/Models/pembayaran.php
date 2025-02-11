@@ -16,6 +16,7 @@ class pembayaran extends Model
         'id_pemesanan',
         'id_pegawai',
         'tanggal_pembayaran',
+        'metode_pembayaran',
         'total_pembayaran',
         'status',
     ];

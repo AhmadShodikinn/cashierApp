@@ -51,17 +51,17 @@
 
                     <div class="w-full grow h-28 flex-col justify-start items-start gap-5 inline-flex">
                         <div class="self-stretch justify-between items-center inline-flex">
+                            <div class="text-black text-xl font-regular font-['Poppins'] leading-normal">Total Cash bulan ini</div>
+                            <div class="text-black text-lg font-light font-['Poppins'] leading-snug">Rp {{ number_format($salesByCash[0]['total_sales'], 0, '.', '.') }}</div>
+                        </div>
+                        <div class="self-stretch justify-between items-center inline-flex">
+                            <div class="text-black text-xl font-regular font-['Poppins'] leading-normal">Total Cashless bulan ini</div>
+                            <div class="text-black text-lg font-light font-['Poppins'] leading-snug">Rp {{ number_format($salesByCashless[0]['total_sales'], 0, '.', '.') }}</div>
+                        </div>
+                        <div class="self-stretch justify-between items-center inline-flex">
                             <div class="text-black text-xl font-semibold font-['Poppins'] leading-normal">Pendapatan</div>
                             <div class="text-black text-lg font-light font-['Poppins'] leading-snug">Rp {{ number_format($totalSales[0], 0, '.', '.') }}</div>
                         </div>
-                        <!-- <div class="self-stretch justify-between items-center inline-flex">
-                            <div class="text-black text-xl font-semibold font-['Poppins'] leading-normal">Stok terjual</div>
-                            <div class="text-black text-lg font-light font-['Poppins'] leading-snug">200 Stok</div>
-                        </div>
-                        <div class="self-stretch justify-between items-center inline-flex">
-                            <div class="text-black text-xl font-semibold font-['Poppins'] leading-normal">Stok tersisa</div>
-                            <div class="text-black text-lg font-light font-['Poppins'] leading-snug">3 Stok</div>
-                        </div> -->
                     </div>
 
                     <div>
@@ -77,8 +77,7 @@
             </div>
         </div>
     </div>
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script> -->
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var ctx = document.getElementById('salesChart').getContext('2d');
@@ -86,8 +85,6 @@
         const periods = <?php echo json_encode($periods); ?>;
         const totalSales = <?php echo json_encode($totalSales); ?>;
         const totalOrders = <?php echo json_encode($totalOrders); ?>;
-
-        console.log(totalOrders);
 
         const salesChart = new Chart(ctx, {
             type: 'bar', 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\pembayaran;
 use App\Models\pemesanan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class ReportController extends Controller
     public function report(Request $request){
         
         $year = $request->input('year', Carbon::now()->format('Y'));
-        // $month = $request->input('month', Carbon::now()->format('m'));
+        $month = $request->input('month', Carbon::now()->format('m'));
 
         $salesData = pemesanan::selectRaw(
             'CASE 
@@ -27,7 +28,20 @@ class ReportController extends Controller
         ->groupBy('period')
         ->get();
 
-    // Siapkan data untuk chart
+        $salesByCash = pembayaran::where('metode_pembayaran', 'Cash')
+            ->whereYear('tanggal_pembayaran', $year)
+            ->groupBy(pembayaran::raw('MONTH(tanggal_pembayaran)'))
+            ->select(pembayaran::raw('MONTH(tanggal_pembayaran) as bulan'), pemesanan::raw('sum(total_pembayaran) as total_sales'))
+            ->get()
+            ->toArray();
+
+        $salesByCashless = pembayaran::where('metode_pembayaran', 'Cashless')
+            ->whereYear('tanggal_pembayaran', $year)
+            ->groupBy(pembayaran::raw('MONTH(tanggal_pembayaran)'))
+            ->select(pembayaran::raw('MONTH(tanggal_pembayaran) as bulan'), pemesanan::raw('sum(total_pembayaran) as total_sales'))
+            ->get()
+            ->toArray();
+
         $periods = [];
         $totalSales = [];
         $totalOrders = [];
@@ -38,8 +52,6 @@ class ReportController extends Controller
             $totalOrders[] = $data->total_orders;
         }
 
-        // dd($periods, $totalSales, $totalOrders);
-
-        return view('laporan', compact('periods', 'totalSales', 'totalOrders'));
+        return view('laporan', compact('periods', 'totalSales', 'totalOrders', 'salesByCash', 'salesByCashless'));
     }
 }
